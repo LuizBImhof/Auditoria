@@ -57,6 +57,10 @@ class Gerenciador:
         self.cursor.execute("UPDATE USUARIO SET ATIVO = 0 WHERE HANDLE = ?",
                             (handle,))
 
+    def desbloqueia_usuario(self, handle):
+        self.cursor.execute("UPDATE USUARIO SET ATIVO = 1 WHERE HANDLE = ?",
+                            (handle,))
+
 
 #VENDA TODO
     def inserir_venda(self, cliente, vendedor, produto,):

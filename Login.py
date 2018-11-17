@@ -97,6 +97,7 @@ class Ui_Login(object):
         sizePolicy.setHeightForWidth(self.cancel_btn.sizePolicy().hasHeightForWidth())
         self.cancel_btn.setSizePolicy(sizePolicy)
         self.cancel_btn.setObjectName("cancel_btn")
+        self.cancel_btn.clicked.connect(self.limpar)
         self.horizontalLayout_2.addWidget(self.cancel_btn)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.verticalLayout_2.addLayout(self.verticalLayout)
@@ -113,7 +114,7 @@ class Ui_Login(object):
         self.senha_lbl.setText(_translate("Login", "Senha:"))
         self.erro_lbl.setText(_translate("Login", ""))
         self.ok_btn.setText(_translate("Login", "OK"))
-        self.cancel_btn.setText(_translate("Login", "Cancelar"))
+        self.cancel_btn.setText(_translate("Login", "Limpar"))
 
 
     def logar(self):
@@ -136,8 +137,12 @@ class Ui_Login(object):
             nome = usuarioLogado[4]
             ativo = usuarioLogado[5]
             handle_usuario = usuarioLogado[6]
-            print(usuario,senha,apaga,escreve, nome, ativo)
-            if(senha == senhains):
+            print(usuario, senha, apaga, escreve, nome, ativo)
+            if (ativo == 0):
+                msg_erro = "Usuario bloqueado, entre em contato com o administrador."
+                self.ok_btn.setEnabled(False)
+
+            elif(senha == senhains):
                 print("Logado")
                 logado = 1
                 self.tentativa = 0
@@ -146,13 +151,12 @@ class Ui_Login(object):
                 self.tentativa = self.tentativa + 1
                 msg_erro = "Senha incorreta, tente novamente " + str(self.tentativa)
 
-            if(ativo != 0):
+
                 if (self.tentativa >= 3):
                     self.ok_btn.setEnabled(False)
                     gerenciaBD.bloqueia_usuario(handle_usuario)
-            else:
-                msg_erro = "Usuario bloqueado, entre em contato com o administrador."
-                self.ok_btn.setEnabled(False)
+                    msg_erro = "Usuario bloqueado, entre em contato com o administrador."
+
 
         self.erro_lbl.setText(_translate("Login", msg_erro))
 
@@ -164,9 +168,12 @@ class Ui_Login(object):
         self.nova.show()
         Login.hide()
 
-
-
-
+    def limpar(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.senha_ins.clear()
+        self.usuario_ins.clear()
+        self.erro_lbl.setText(_translate("Login", ""))
+        self.ok_btn.setEnabled(True)
 
 
 
