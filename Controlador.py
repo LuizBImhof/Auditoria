@@ -7,7 +7,6 @@ class Controlador:
     escreve = 0
     vendedor = ""
 
-
     def __init__(self, usuario, apaga, escreve, nome):
         self.usuario = usuario
         self.apaga = apaga

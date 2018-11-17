@@ -7,7 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import Controlador
 from Inicio import *
+
 from Gerenciador import gerenciaBD
 
 
@@ -15,6 +17,7 @@ class Ui_Login(object):
 
 
     def setupUi(self, Login):
+        self.tentativa = 0
         Login.setObjectName("Login")
         Login.resize(518, 248)
         Login.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -102,6 +105,7 @@ class Ui_Login(object):
         QtCore.QMetaObject.connectSlotsByName(Login)
 
     def retranslateUi(self, Login):
+
         _translate = QtCore.QCoreApplication.translate
         Login.setWindowTitle(_translate("Login", "Login - Sistema de vendas"))
         self.sistema_lbl.setText(_translate("Login", "NOME DO SISTEMA"))
@@ -114,23 +118,43 @@ class Ui_Login(object):
 
     def logar(self):
         _translate = QtCore.QCoreApplication.translate
-        usuario = self.usuario_ins.text()
-        senha = self.senha_ins.text()
-        tentativa = 0
+        usuarioins = self.usuario_ins.text()
+        senhains = self.senha_ins.text()
+        logado = 0
         msg_erro = ""
-        usuarioLogado = gerenciaBD.busca_usuario(usuario)
+        usuarioLogado = gerenciaBD.busca_usuario(usuarioins)
+        print (self.tentativa)
+
         if (usuarioLogado == None):
             msg_erro = "Usuário inexistente, tente novamente"
+            self.erro_lbl.setText(_translate("Login", msg_erro))
         else:
-            print(usuarioLogado)
+            usuario = usuarioLogado[0]
+            senha = usuarioLogado[1]
+            apaga = usuarioLogado[2]
+            escreve = usuarioLogado[3]
+            nome = usuarioLogado[4]
+            ativo = usuarioLogado[5]
+            handle_usuario = usuarioLogado[6]
+            print(usuario,senha,apaga,escreve, nome, ativo)
+            if(senha == senhains):
+                print("Logado")
+                logado = 1
+                self.tentativa = 0
+                self.abreTelaInicial()
+            else:
+                self.tentativa = self.tentativa + 1
+                msg_erro = "Senha incorreta, tente novamente " + str(self.tentativa)
 
-
+            if(ativo != 0):
+                if (self.tentativa >= 3):
+                    self.ok_btn.setEnabled(False)
+                    gerenciaBD.bloqueia_usuario(handle_usuario)
+            else:
+                msg_erro = "Usuario bloqueado, entre em contato com o administrador."
+                self.ok_btn.setEnabled(False)
 
         self.erro_lbl.setText(_translate("Login", msg_erro))
-
-
-
-
 
 
     def abreTelaInicial(self):

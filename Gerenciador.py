@@ -28,7 +28,7 @@ class Gerenciador:
 
     def busca_usuario(self,login):
         usuario = None
-        self.cursor.execute("SELECT LOGIN, SENHA, APAGA, ESCREVE, NOME FROM USUARIO WHERE LOGIN = ?",
+        self.cursor.execute("SELECT LOGIN, SENHA, APAGA, ESCREVE, NOME, ATIVO, HANDLE FROM USUARIO WHERE LOGIN = ?",
                             (login,))
         for linha in cursor.fetchall():
             usuario = linha
@@ -51,6 +51,11 @@ class Gerenciador:
         else:
             print(usuario)
             #retorna true
+
+
+    def bloqueia_usuario(self, handle):
+        self.cursor.execute("UPDATE USUARIO SET ATIVO = 0 WHERE HANDLE = ?",
+                            (handle,))
 
 
 #VENDA TODO
