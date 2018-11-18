@@ -16,7 +16,7 @@ from Gerenciador import gerenciaBD
 class Ui_Login(object):
 
 
-    def setupUi(self, Login):
+    def setupLogin(self, Login):
         self.tentativa = 0
         Login.setObjectName("Login")
         Login.resize(518, 248)
@@ -123,7 +123,7 @@ class Ui_Login(object):
         senhains = self.senha_ins.text()
         logado = 0
         msg_erro = ""
-        usuarioLogado = gerenciaBD.busca_usuario(usuarioins)
+        usuarioLogado = gerenciaBD.busca_usuario_login(usuarioins)
         print (self.tentativa)
 
         if (usuarioLogado == None):
@@ -149,6 +149,7 @@ class Ui_Login(object):
                 self.abreTelaInicial()
             else:
                 self.tentativa = self.tentativa + 1
+
                 msg_erro = "Senha incorreta, tente novamente " + str(self.tentativa)
 
 
@@ -183,7 +184,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Login = QtWidgets.QWidget()
     ui = Ui_Login()
-    ui.setupUi(Login)
+    ui.setupLogin(Login)
     Login.show()
     sys.exit(app.exec_())
 

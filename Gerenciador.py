@@ -22,11 +22,11 @@ class Gerenciador:
 
         self.cursor.execute(
             "INSERT INTO USUARIO (LOGIN, SENHA ,APAGA, ESCREVE, VENDAS, NOME, DATACRIACAO) VALUES (?,?,?,?,?,?,?)",
-            (login, senha, apaga, escreve, 0, nome, datacriacao))
+                                    (login, senha, apaga, escreve, 0, nome, datacriacao))
         self.conn.commit()
 
 
-    def busca_usuario(self,login):
+    def busca_usuario_login(self, login):
         usuario = None
         self.cursor.execute("SELECT LOGIN, SENHA, APAGA, ESCREVE, NOME, ATIVO, HANDLE FROM USUARIO WHERE LOGIN = ?",
                             (login,))
@@ -34,6 +34,14 @@ class Gerenciador:
             usuario = linha
         return usuario
 
+
+    def busca_usuario_todo(self, login):
+        usuario = None
+        self.cursor.execute("SELECT * FROM USUARIO WHERE LOGIN = ?",
+                            (login,))
+        for linha in cursor.fetchall():
+            usuario = linha
+        return usuario
 
 
     def busca_usuario_login_senha(self, login, senha):

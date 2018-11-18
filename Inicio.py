@@ -8,7 +8,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from teste import *
+from Novo_usuario import *
 class Ui_Inicio(object):
+
+
+
+
     def setupUi(self, Inicio):
         Inicio.setObjectName("MainWindow")
         Inicio.resize(800, 600)
@@ -25,7 +30,7 @@ class Ui_Inicio(object):
         sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
         self.pushButton_2.setSizePolicy(sizePolicy)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(self.abreOutra)
+        self.pushButton_2.clicked.connect(self.abreUsuarioNovo)
         self.verticalLayout_2.addWidget(self.pushButton_2)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
@@ -54,12 +59,11 @@ class Ui_Inicio(object):
         self.pushButton_2.setText(_translate("MainWindow", "PushButton"))
         self.pushButton.setText(_translate("MainWindow", "PushButton"))
 
-    def abreOutra(self):
-        self.nova = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
+    def abreUsuarioNovo(self):
+        self.nova = QtWidgets.QWidget()
+        self.ui = Ui_usuario()
         self.ui.setupUi(self.nova)
         self.nova.show()
-
 
 
 

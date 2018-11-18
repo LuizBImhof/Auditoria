@@ -6,7 +6,7 @@ class Controlador:
     apaga = 0
     escreve = 0
     vendedor = ""
-
+    gerenciaBD.inserir_usuario("a","a",0,0,"a")
     def __init__(self, usuario, apaga, escreve, nome):
         self.usuario = usuario
         self.apaga = apaga
