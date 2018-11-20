@@ -104,7 +104,7 @@ class Ui_usuario(object):
     def retranslateUi(self, usuario):
         _translate = QtCore.QCoreApplication.translate
         usuario.setWindowTitle(_translate("usuario", "Novo usuário "))
-        self.label_3.setText(_translate("usuario", "Novo Usuário:"))
+        self.label_3.setText(_translate("usuario", "Novo Usuário"))
         self.label.setText(_translate("usuario", "Nome"))
         self.label_2.setText(_translate("usuario", "Senha"))
         self.apaga_check.setText(_translate("usuario", "Permite Apagar"))
