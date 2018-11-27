@@ -149,5 +149,3 @@ class Gerenciador:
 conn = sqlite3.connect('BANCO.db')
 cursor = conn.cursor()
 gerenciaBD = Gerenciador(conn, cursor)
-#gerenciaBD.inserir_usuario('admin', 'admin', 1, 1, 'luiz')
-# gerenciaBD.busca_usuario_login_senha('admin','admin')

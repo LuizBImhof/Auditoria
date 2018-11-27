@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from teste import *
+
 from Novo_usuario import *
 class Ui_Inicio(object):
 
@@ -39,6 +39,7 @@ class Ui_Inicio(object):
         sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
         self.pushButton.setSizePolicy(sizePolicy)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.mostraAviso)
         self.verticalLayout_2.addWidget(self.pushButton)
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
         Inicio.setCentralWidget(self.centralwidget)
@@ -56,8 +57,8 @@ class Ui_Inicio(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Início - Nome do sistema de vendas - user"))
-        self.pushButton_2.setText(_translate("MainWindow", "PushButton"))
-        self.pushButton.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton_2.setText(_translate("MainWindow", "Novo Usuario"))
+        self.pushButton.setText(_translate("MainWindow", "Mostrar usuário"))
 
     def abreUsuarioNovo(self):
         self.nova = QtWidgets.QWidget()
@@ -65,6 +66,8 @@ class Ui_Inicio(object):
         self.ui.setupUi(self.nova)
         self.nova.show()
 
+    def mostraAviso(self):
+        QMessageBox.warning(Inicio, 'Em desenvolvimento', 'Continuação do trabalho futuramente')
 
 
 if __name__ == "__main__":
